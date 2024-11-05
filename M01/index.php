@@ -5,8 +5,6 @@ include('connect.php');
 $query = "SELECT 
     c.username,
     p.content,
-    p.isDeleted,
-    p.attachment,
     pr.name AS province_name,
     ci.name AS city_name
 FROM 
@@ -16,9 +14,7 @@ JOIN
 JOIN 
     provinces pr ON p.provinceID = pr.provinceID
 JOIN 
-    cities ci ON p.cityID = ci.cityID
-WHERE 
-    p.isDeleted = 0";
+    cities ci ON p.cityID = ci.cityID";
 
 $result = mysqli_query($conn, $query);
 
@@ -64,9 +60,6 @@ if (isset($_POST['btnCreatePost'])) {
    header("Location: " . $_SERVER['PHP_SELF']);
    exit();
 }
-
-
-
 ?>
 
 <!doctype html>
