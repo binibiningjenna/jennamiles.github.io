@@ -1,0 +1,68 @@
+body,
+html {
+  overflow-x: hidden;
+}
+.background {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.main-cover {
+  position: relative;
+  margin-bottom: 25px;
+}
+#categoryButton {
+  background-color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  padding: 8px 20px;
+  width: 150px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#categoryButton:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.card {
+  margin: 20px 0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.card-header {
+  background-color: #f7f7f7;
+  border-bottom: none;
+}
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.location {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+.btn-edit,
+.btn-delete {
+  margin-right: 10px;
+}
+.reaction-icons {
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+.header {
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+}
+
+.subheader {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 400;
+}
+
+.regular-text {
+  font-family: "Poppins", sans-serif;
+}
