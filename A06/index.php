@@ -64,13 +64,47 @@ if (isset($_POST['btnCreatePost'])) {
 
 if (isset($_POST['btnDelete'])) {
   $postID = $_POST['postID'];
-  
-  $deleteQuery = "DELETE FROM posts WHERE postID = '$postID'";
-  executeQuery($deleteQuery);
-  
-   // Redirect to avoid form resubmission on refresh
-   header("Location: " . $_SERVER['PHP_SELF']);
-   exit();
+
+  // Retrieve userID, cityID, and provinceID from the posts table
+  $detailsQuery = "SELECT userID, cityID, provinceID FROM posts WHERE postID = '$postID'";
+  $detailsResult = mysqli_query($conn, $detailsQuery);
+  $details = mysqli_fetch_assoc($detailsResult);
+
+  if ($details) {
+      $userID = $details['userID'];
+      $cityID = $details['cityID'];
+      $provinceID = $details['provinceID'];
+
+      // Retrieve userInfoID from the clients table using userID
+      $userInfoQuery = "SELECT userInfoID FROM clients WHERE userID = '$userID'";
+      $userInfoResult = mysqli_query($conn, $userInfoQuery);
+      $userInfo = mysqli_fetch_assoc($userInfoResult);
+      $userInfoID = $userInfo['userInfoID'];
+
+      // Delete the post
+      $deletePostQuery = "DELETE FROM posts WHERE postID = '$postID'";
+      mysqli_query($conn, $deletePostQuery);
+
+      // Delete the client
+      $deleteClientQuery = "DELETE FROM clients WHERE userID = '$userID'";
+      mysqli_query($conn, $deleteClientQuery);
+
+      // Delete the user info
+      $deleteUserInfoQuery = "DELETE FROM userinfo WHERE userInfoID = '$userInfoID'";
+      mysqli_query($conn, $deleteUserInfoQuery);
+
+      // Delete the city
+      $deleteCityQuery = "DELETE FROM cities WHERE cityID = '$cityID'";
+      mysqli_query($conn, $deleteCityQuery);
+
+      // Delete the province
+      $deleteProvinceQuery = "DELETE FROM provinces WHERE provinceID = '$provinceID'";
+      mysqli_query($conn, $deleteProvinceQuery);
+  }
+
+  // Redirect to avoid form resubmission
+  header("Location: " . $_SERVER['PHP_SELF']);
+  exit();
 }
 
 ?>
